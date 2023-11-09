@@ -2,38 +2,35 @@ package com.example.Book_My_Shows.Models;
 
 import com.example.Book_My_Shows.Enum.City;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table
-@Data
-@NoArgsConstructor
+@Table(name = "theater")
+@Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Theater {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Integer theatreId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer theaterId;
 
     private String name;
 
     private String address;
 
-
-    @Enumerated (value = EnumType.STRING)
+    @Enumerated(value = EnumType.STRING)
     private City city;
 
-
-    @OneToMany (mappedBy = "theatre",cascade = CascadeType.ALL)
-    private List<Shows> showsList = new ArrayList<>();
-
-    @OneToMany (mappedBy = "theatre",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "theater",cascade = CascadeType.ALL)
     private List<TheaterSeat> theaterSeatList = new ArrayList<>();
+
+
+    @OneToMany(mappedBy = "theater",cascade = CascadeType.ALL)
+    private List<Show> showList = new ArrayList<>();
 }

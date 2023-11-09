@@ -2,23 +2,20 @@ package com.example.Book_My_Shows.Models;
 
 import com.example.Book_My_Shows.Enum.Genre;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "movie")
+@Getter
+@Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Movie {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,4 +32,6 @@ public class Movie {
     private LocalDate releaseDate;
 
     @OneToMany(mappedBy = "movie",cascade = CascadeType.ALL)
-    private List<Shows> showList = new ArrayList<>();}
+    private List<Show> showList = new ArrayList<>();
+
+}

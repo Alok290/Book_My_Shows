@@ -29,7 +29,7 @@ public class ShowService {
     private TheaterRepository theaterRepository;
     public String addShow(AddShowRequest addShowRequest) {
 
-        Shows shows = ShowTransformers.convertAddShowRequestToEntity(addShowRequest);
+        Show show = ShowTransformers.convertAddShowRequestToEntity(addShowRequest);
 
         Movie movie = movieRepository.findMovieByMovieName(addShowRequest.getMovieName());
 
@@ -37,20 +37,26 @@ public class ShowService {
         Theater theater = optionalTheatre.get();
 
 
-        shows.setMovie(movie);
-        shows.setTheater(theater);
+        show.setMovie(movie);
+        show.setTheater(theater);
+
+        theater.getShowList().add(show);
+        movie.getShowList().add(show);
 
 
-       shows= showRepository.save(shows);
+       show = showRepository.save(show);
 
-        return "Show has been saved to the DB with showId "+shows.getShowId();
+        return "Show has been saved to the DB with showId "+ show.getShowId();
 
 
     }
 
     public String createShowSeat(AddShowSeatRequest showSeatsRequest) {
-        Shows show = showRepository.findById(showSeatsRequest.getShowId()).get();
+
+        Show show = showRepository.findById(showSeatsRequest.getShowId()).get();
+
         Theater theater = show.getTheater();
+
         List<TheaterSeat> theaterSeatList = theater.getTheaterSeatList();
 
         List<ShowSeat> showSeatList = new ArrayList<>();
@@ -63,7 +69,7 @@ public class ShowService {
                     .seatType(theaterSeat.getSeatType())
                     .isAvailable(true)
                     .isFoodAttached(false)
-                    .shows(show)
+                    .show(show)
                     .build();
 
             if(theaterSeat.getSeatType().equals(SeatType.CLASSIC)){

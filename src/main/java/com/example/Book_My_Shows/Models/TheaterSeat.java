@@ -3,22 +3,20 @@ package com.example.Book_My_Shows.Models;
 
 import com.example.Book_My_Shows.Enum.SeatType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
-@Table
-@Data
-@Builder
-@NoArgsConstructor
+@Table(name = "theater_seats")
+@Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class TheaterSeat {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Integer theatreSeatId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer theaterSeatId;
 
     private String seatNo;
 

@@ -13,7 +13,7 @@ public class UserTransformers {
                 .name(addUserRequest.getName())
                 .age(addUserRequest.getAge())
                 .emailId(addUserRequest.getEmailId())
-                .mobileNo(addUserRequest.getMobNo())
+                .mobNo(addUserRequest.getMobNo())
                 .age(addUserRequest.getAge())
                 .build();
         return user;

@@ -6,10 +6,13 @@ import com.example.Book_My_Shows.Models.TheaterSeat;
 import com.example.Book_My_Shows.Repository.TheaterRepository;
 import com.example.Book_My_Shows.RequestDto.AddTheaterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Service
 public class TheaterService {
 
     @Autowired

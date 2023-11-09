@@ -2,31 +2,34 @@ package com.example.Book_My_Shows.Models;
 
 import ch.qos.logback.core.boolex.EvaluationException;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table
-@Data
+@Table(name = "user")
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class User {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Integer userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     private String name;
 
     @Column(unique = true)
     private String emailId;
 
-    private String mobileNo;
+    private String mobNo;
 
     private Integer age;
 
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<Ticket> ticketList = new ArrayList<>();
 }
